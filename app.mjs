@@ -1,5 +1,5 @@
 import {blank,validate,validDate,statuses,summary,grade,attendanceCsv} from './model.mjs';
-const $=s=>document.querySelector(s),key='sfe-headcount-v1';let state=blank(),quizQuestions=[];
+const $=s=>document.querySelector('.hc-app').querySelector(s),key='sfe-headcount-v1';let state=blank(),quizQuestions=[];
 function message(text){$('#status').textContent=text;}
 try{const saved=localStorage.getItem(key);if(saved)state=validate(JSON.parse(saved));}catch{message('Your saved classroom could not be opened. Restore a backup, or start a new classroom.');}
 const now=new Date();$('#date').value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
@@ -20,6 +20,7 @@ $('#date').onchange=()=>{if(!validDate($('#date').value))message('Choose a valid
 $('#add-learner').onsubmit=e=>{e.preventDefault();const name=$('#learner-name').value.trim();if(!name)return;if(state.learners.length>=300){message('This classroom supports up to 300 learners.');return;}const next=structuredClone(state);next.learners.push({id:crypto.randomUUID(),name});if(save(next))$('#learner-name').value='';};
 $('#backup').onclick=()=>download(JSON.stringify(state,null,2),'headcount-classroom.json','application/json');
 $('#export').onclick=()=>{try{download(attendanceCsv(state,$('#date').value),`headcount-${$('#date').value}.csv`,'text/csv');}catch(e){message(e.message);}};
+$('#restore-button').onclick=()=>$('#restore').click();
 $('#restore').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2*1024*1024)throw Error('Choose a backup under 2 MB.');const next=validate(JSON.parse(await file.text()));if(confirm('Replace this device’s classroom with the selected backup? Download your current backup first.'))save(next);}catch(error){message('Restore failed: '+error.message);}finally{e.target.value='';}};
 $('#clear').onclick=()=>{if(confirm('Clear the classroom and quiz from this device? This cannot be undone without your downloaded backup.'))save(blank());};
 function tab(which){for(const name of ['attendance','quiz']){$('#tab-'+name).setAttribute('aria-selected',String(name===which));$('#'+name+'-panel').hidden=name!==which;}}
