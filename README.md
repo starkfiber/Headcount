@@ -12,6 +12,7 @@ Rounded Nunito typography, warm paper surfaces and four distinct answer colours 
 
 ## Make room for a little fun
 
+- Reconnect on wake, online and refresh; retry-safe joining and locally queued answers.
 - Phone remote: scan from your teacher workspace, sign in, then start, reveal, advance and show the leaderboard while the projector stays fullscreen.
 - Teacher-started 15, 30 or 60 second rounds, or no timer. Add time when the class needs it.
 - Full-page classroom lobby with a large QR code and arriving nickname tiles. Native fullscreen where supported.
