@@ -2,7 +2,11 @@
 
 Attendance and quick classroom quizzes, by Stark Fiber Enterprise. Formerly the eHadir initiative. MIT licensed.
 
-## First release
+## Free hosted classrooms
+
+[Open Headcount](https://starkfiber.my/headcount) for saved teacher classrooms, attendance and live quizzes. Students join by session code and nickname. See [cloud source and integration notes](CLOUD-CLASSROOMS.md) for the new MIT source module, free limits and validation scope. The cloud module needs a host account/database integration; the root app below stays standalone.
+
+## Standalone browser-local edition
 Browser-local classroom of up to 300 learners, date-based attendance, four-option quizzes, practice grading, CSV export, validated JSON backup/restore. No server, accounts, uploads or paid inference. Names are rendered as text and CSV formulas are neutralised. Use initials on shared devices. Browser storage is not encrypted and is not a durable school record system; keep protected backups and follow your organisation’s retention rules.
 
 Serve this directory with a static HTTP server and open index.html. Run `npm test` with Node 22+. The hosted version is https://starkfiber.my/headcount . Do not open modules using file://.
