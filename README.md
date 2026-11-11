@@ -10,6 +10,17 @@ Rounded Nunito typography, warm paper surfaces and four distinct answer colours 
 
 ![Headcount classroom home](headcount-preview.png)
 
+## Make room for a little fun
+
+- Teacher-started 15, 30 or 60 second rounds, or no timer. Add time when the class needs it.
+- Scan a QR code to join; no student account required.
+- Optional nickname leaderboard, shared ranks and equal points for correct answers.
+- Session streaks, levels and gentle answer celebrations, with reduced-motion support.
+- Three free starter quizzes: numbers, nature and digital safety.
+- A PNG or SVG learning keepsake at the end of the session.
+
+The teacher decides when to reveal, move on and show scores. No speed bonus, paid inference or public display of private exit tickets. Levels and streaks are session activities, not academic credentials.
+
 ## One lesson, one clear flow
 
 1. **Prepare:** save a class roster and reuse a lesson quiz.

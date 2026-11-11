@@ -27,3 +27,9 @@ Topic accuracy uses submitted responses to revealed questions. Below 60% suggest
 ## Verification
 
 Unit tests cover teacher isolation, stale saves, answer withholding, phase transitions, lesson ownership, exit-ticket privacy/updates, missing-response semantics and deletion. Integration and browser results for this release are recorded in the release handover. The earlier 100-participant synthetic smoke test was not a sustained production capacity benchmark. No Kahoot parity claim.
+
+## Classroom game controls
+
+Countdown0/15/30/60 seconds is selected before a question. The server rejects answers at the deadline. Time expiry never reveals or advances automatically; the teacher can add15 seconds. Refresh/rejoin reads the existing deadline rather than restarting it. Leaderboards are off by default; when enabled, only nicknames and revealed-answer points appear. Correct answers earn100 points, ties share ranks, and no speed bonus applies. Streaks and levels reset with each session. PNG/SVG keepsakes are generated on the student's device.
+
+QR generation uses vendored MIT qrcode-generator2.0.4; codes contain the public joining URL and code, not participant or projector credentials. Scan prefills the code. Classroom feedback and exit-ticket notes remain private even when the scoreboard is enabled. Countdown rendering uses local monotonic elapsed time against a server snapshot; network synchronization still uses polling.
