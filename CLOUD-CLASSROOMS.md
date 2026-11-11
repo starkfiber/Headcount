@@ -1,15 +1,29 @@
-# Headcount cloud classrooms — first release
+# Cloud classroom module
 
-Headcount at https://starkfiber.my/headcount now offers free teacher classrooms, manually confirmed attendance and teacher-led quizzes. Students join with a code and nickname; no student email is requested. The original browser-local application in this repository remains available.
+The [source archive](headcount-cloud-source.zip) contains the current MIT service, API, React screens and behavior tests. Extract it and follow its README for host adapters. Node 24, Next.js 16, React 19, Zod 4 and Vitest 4 are the tested runtime family. Enable SQLite foreign keys and protect persistent storage. Reuse secure server-side authentication; never accept a client-provided teacher ID.
 
-## Source integration
+## What is available
 
-`headcount-cloud-source.zip` contains the MIT-licensed classroom service, Next.js route/client pages and behavior tests used for this first release. This is an integration module, not a standalone replacement for SFE’s account platform. The archive README documents host adapters. Production credentials and classroom records are never included.
+- Saved classrooms and manually confirmed attendance.
+- Teacher-controlled live quizzes and projector view, with correct answers withheld until reveal.
+- Per-question topics and reusable private lesson library; loading a lesson copies questions into the class.
+- Exit tickets: confidence, learning reflection and help request. Students can revise while tickets are open.
+- Teacher-only topic summaries and participant feedback, with JSON export.
 
-Free limits: 10 saved classes per teacher, 100 learners per class, 100 participants per session, 30 questions per quiz. Sessions expire after six hours; transient attendance/nickname/response records are cleaned after seven days on service access. Class setup remains until its owner removes it. Download records you need. Nicknames and attendance are not verified student identities; this is not a secure examination system.
+## Limits and retention
 
-## Verified scope
+10 saved classes per teacher, 100 learners per class, 100 participants per session, 30 questions per quiz and 30 saved reusable lessons. Sessions last six hours. Session attendance, nicknames, answers and exit tickets are cleaned after seven days on service access. Export records you need. Saved classes and lessons remain until the owner deletes them. Class deletion cascades to its sessions. Students are not verified identities; do not use this as a secure exam system.
 
-Store tests cover cross-owner denial, stale revisions, validated roster/questions, correct-answer withholding, first-response-wins, teacher reveal/lock/end transitions, frozen session snapshots, expiry and deletion. An isolated signup-to-session HTTP flow and browser teacher/student flow were exercised. A synthetic smoke test admitted 100 participants, rejected participant 101 and served 100 reads with 20 concurrent readers. It is not a sustained production load benchmark.
+## Architecture and scaling
 
-Development continues with pilot classroom feedback, improved question editing/imports and richer reports. No claim of Kahoot feature parity.
+The browser renders the classroom; the server remains authoritative for access, phase transitions and responses. SQLite WAL stores isolated sessions. Student/projector polling runs every three seconds and teacher polling every four; hidden tabs pause, requests do not overlap, and ended sessions stop polling. A participant/session index supports room queries.
+
+This is not peer-to-peer, serverless or unlimited-capacity hosting. Keep a single writer deployment today. Horizontal scaling requires a shared store, distributed rate limits and measured realtime fan-out. A future WebSocket/SSE adapter must preserve auth, recovery, privacy and scoring behavior before replacing polling. No paid inference is used for feedback.
+
+## Feedback meaning
+
+Topic accuracy uses submitted responses to revealed questions. Below 60% suggests reteaching; 60–79% practice; 80%+ extension. No responses means check understanding. Missing responses are displayed separately. A participant is highlighted for check-in after an explicit help request, low confidence or below 60% accuracy among submitted revealed answers. Small samples are not reliable ability assessments. Never expose private reflections on the projector or automatically link nicknames to roster identities.
+
+## Verification
+
+Unit tests cover teacher isolation, stale saves, answer withholding, phase transitions, lesson ownership, exit-ticket privacy/updates, missing-response semantics and deletion. Integration and browser results for this release are recorded in the release handover. The earlier 100-participant synthetic smoke test was not a sustained production capacity benchmark. No Kahoot parity claim.

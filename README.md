@@ -1,26 +1,43 @@
 # Headcount
 
-Attendance and quick classroom quizzes, by Stark Fiber Enterprise. Formerly the eHadir initiative. MIT licensed.
+**Know who is here. Find out what clicked. Plan what comes next.**
 
-## Free hosted classrooms
+Free attendance, live lesson quizzes and private exit tickets by Stark Fiber Enterprise. MIT open source.
 
-[Open Headcount](https://starkfiber.my/headcount) for saved teacher classrooms, attendance and live quizzes. Students join by session code and nickname. See [cloud source and integration notes](CLOUD-CLASSROOMS.md) for the new MIT source module, free limits and validation scope. The cloud module needs a host account/database integration; the root app below stays standalone.
+[Start a classroom](https://starkfiber.my/headcount/classroom) · [Join with a code](https://starkfiber.my/headcount/join) · [Explore Headcount](https://starkfiber.my/headcount)
 
-## Standalone browser-local edition
-Browser-local classroom of up to 300 learners, date-based attendance, four-option quizzes, practice grading, CSV export, validated JSON backup/restore. No server, accounts, uploads or paid inference. Names are rendered as text and CSV formulas are neutralised. Use initials on shared devices. Browser storage is not encrypted and is not a durable school record system; keep protected backups and follow your organisation’s retention rules.
+## One lesson, one clear flow
 
-Serve this directory with a static HTTP server and open index.html. Run `npm test` with Node 22+. The hosted version is https://starkfiber.my/headcount . Do not open modules using file://.
+1. **Prepare:** save a class roster and reuse a lesson quiz.
+2. **Welcome:** take attendance; students join with a code and nickname, without email.
+3. **Teach:** present questions, collect responses, reveal and discuss.
+4. **Listen:** open exit tickets for confidence, one learning point and a request for help.
+5. **Follow up:** review topic results and private learner responses; export before retention expires.
 
-Quizzes are local practice, not secure exams: answers are in the source/backup and no student identity is verified. No cross-device portal or LMS is claimed. Multiple browser tabs are not a collaborative session; use one editing tab per classroom.
+Teachers see missing answers separately from incorrect answers. Feedback suggests **teach again**, **practise together** or **extend**, based on submitted answers. It is a conversation starter, not a judgement of student ability. Participant nicknames are not verified roster identities.
 
-## Development track
-1. Local classroom, import/export and reproducible tests.
-2. Academy integration with existing SFE sign-in, verified teachers, class permissions and audit history.
-3. Opt-in student check-in and quiz submissions with server-side scoring, consent and retention controls.
-4. Only after those foundations: student portal, progress and LMS integrations.
+## Choose your edition
 
-The earlier `attendance.mjs` adapter remains available for Academy integration. Its server-authorised path is separate from this local classroom. No live Academy student data is included.
+| | Browser-local | Hosted classrooms |
+|---|---|---|
+| Start | Serve this repository’s index.html | Open the website |
+| Accounts | None | Teacher account; students use a code |
+| Data | This browser; export your backups | Teacher-owned classes and temporary sessions |
+| Activities | Attendance and local quiz practice | Live quiz, exit tickets, topic feedback, lesson library |
+| Source | Root JavaScript files | [MIT cloud module](headcount-cloud-source.zip) |
+
+The cloud module is integration source, not a turnkey hosting package. [Read setup, limits and architecture](CLOUD-CLASSROOMS.md). The standalone root app does not yet include cross-device sessions or exit tickets.
+
+## Run locally
+
+Use Node 22+ and run `npm test`. Serve this directory with a static HTTP server and open `index.html`; browser modules cannot run from `file://`. The local edition supports up to 300 learners and portable JSON/CSV records. Browser storage is not encrypted; use initials and keep protected backups.
+
+## Help build it
+
+[Contributor guide](CONTRIBUTING.md) · [Learning roadmap](ROADMAP.md) · [MIT licence](LICENSE)
+
+Useful contributions: keyboard/mobile accessibility, teacher-tested question templates, translations, connection recovery and portable self-hosting adapters. Use synthetic learners in tests and screenshots. Never submit real classroom records or credentials.
 
 ## Origins
 
-Headcount continues the eHadir initiative. The original licence and the Academy attendance adapter remain in this repository with their history and attribution. No original school application source or student records were present. The new dependency-free classroom workspace is a first release, not a migration of existing school records.
+Headcount continues the eHadir initiative. The original licence and Academy attendance adapter remain in this repository with their history and attribution. No original school database or learner records are included. SFE brand artwork is separate from the MIT code; use your own identity for forks.
