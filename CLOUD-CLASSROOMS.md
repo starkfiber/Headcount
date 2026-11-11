@@ -37,3 +37,7 @@ QR generation uses vendored MIT qrcode-generator2.0.4; codes contain the public 
 ## Scan-first attendance
 
 Start session saves the classroom and opens its QR invite without requiring a roster or quiz. Class lists are optional. Joining never marks attendance. Teachers can add a joined nickname to this session and confirm present, or mark an existing roster entry to avoid duplicates. Repeated confirmation is idempotent. This does not add the nickname to the saved class list. Attendance remains editable and exportable; identifying absences needs an expected class list.
+
+## Classroom projection and bulk confirmation
+
+The read-only screen token exposes joining nicknames only in the lobby, never teacher attendance records or feedback. The teacher selects a snapshot of participants and submits one authenticated batch; new arrivals remain unselected. Validation completes before one database update; invalid or stale participant IDs reject the whole batch. Existing roster entries should be marked instead of duplicated. Native fullscreen is user-initiated with a full-page fallback; nickname tiles respect reduced motion. Refresh uses the existing three-second polling, not WebSockets. No extra dependency or external skill was needed; reviewed screenfull on GitHub for browser support considerations.

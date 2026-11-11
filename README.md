@@ -13,7 +13,8 @@ Rounded Nunito typography, warm paper surfaces and four distinct answer colours 
 ## Make room for a little fun
 
 - Teacher-started 15, 30 or 60 second rounds, or no timer. Add time when the class needs it.
-- Scan a QR code to join; no student account required.
+- Full-page classroom lobby with a large QR code and arriving nickname tiles. Native fullscreen where supported.
+- Select waiting students and confirm attendance together; students never mark themselves present.
 - Optional nickname leaderboard, shared ranks and equal points for correct answers.
 - Session streaks, levels and gentle answer celebrations, with reduced-motion support.
 - Three free starter quizzes: numbers, nature and digital safety.
