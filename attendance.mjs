@@ -32,3 +32,4 @@ export function attendanceSummary(values) {
   const eligible = marked-counts.Excused;
   return {enrolled,marked,counts,attendanceRate:eligible ? Math.round((counts.Present+counts.Late)/eligible*10000)/100 : null};
 }
+

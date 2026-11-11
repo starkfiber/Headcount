@@ -1,0 +1,15 @@
+export const statuses=['Unmarked','Present','Absent','Late','Excused'];
+export function blank(){return {version:1,className:'My classroom',learners:[],attendance:{},questions:[]};}
+export function validDate(value){return typeof value==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value))&&new Date(value).toISOString().slice(0,10)===value;}
+export function validate(data){
+ if(!data||data.version!==1||typeof data.className!=='string'||data.className.length>80||!Array.isArray(data.learners)||data.learners.length>300||!Array.isArray(data.questions)||data.questions.length>50||!data.attendance||typeof data.attendance!=='object'||Array.isArray(data.attendance))throw Error('Use a valid Headcount classroom backup.');
+ const ids=new Set();for(const l of data.learners){if(!l||typeof l.id!=='string'||!/^[a-zA-Z0-9-]{1,80}$/.test(l.id)||ids.has(l.id)||typeof l.name!=='string'||!l.name.trim()||l.name.length>100)throw Error('Invalid or repeated learner.');ids.add(l.id);}
+ if(Object.keys(data.attendance).length>3660)throw Error('Backup contains too many dates.');
+ const attendance={};for(const [date,roster] of Object.entries(data.attendance)){if(!validDate(date)||!roster||typeof roster!=='object'||Array.isArray(roster))throw Error('Invalid attendance date or roster.');attendance[date]={};for(const [id,status] of Object.entries(roster)){if(!ids.has(id)||!statuses.includes(status))throw Error('Invalid attendance entry.');attendance[date][id]=status;}}
+ const qids=new Set();for(const q of data.questions){if(!q||typeof q.id!=='string'||!/^[a-zA-Z0-9-]{1,80}$/.test(q.id)||qids.has(q.id)||typeof q.text!=='string'||!q.text.trim()||q.text.length>500||!Array.isArray(q.options)||q.options.length!==4||q.options.some(o=>typeof o!=='string'||!o.trim()||o.length>200)||!Number.isInteger(q.answer)||q.answer<0||q.answer>3)throw Error('Review quiz questions and answers.');qids.add(q.id);}
+ return {version:1,className:data.className,learners:data.learners.map(({id,name})=>({id,name})),attendance,questions:data.questions.map(({id,text,options,answer})=>({id,text,options:[...options],answer}))};
+}
+export function summary(roster){const counts=Object.fromEntries(statuses.map(s=>[s,0]));for(const value of Object.values(roster)){if(!statuses.includes(value))throw Error('Invalid status');counts[value]++;}return counts;}
+export function grade(questions,answers){if(!questions.length)throw Error('Add a question first.');if(questions.some(q=>!Number.isInteger(answers[q.id])||answers[q.id]<0||answers[q.id]>3))throw Error('Answer every question.');return {correct:questions.filter(q=>q.answer===answers[q.id]).length,total:questions.length};}
+export function csvCell(value){let v=String(value);if(/^[\s]*[=+@-]/.test(v))v="'"+v;return '"'+v.replaceAll('"','""')+'"';}
+export function attendanceCsv(state,date){if(!validDate(date))throw Error('Choose a valid date');return [['Class','Date','Learner','Status'],...state.learners.map(l=>[state.className,date,l.name,state.attendance[date]?.[l.id]||'Unmarked'])].map(row=>row.map(csvCell).join(',')).join('\r\n');}

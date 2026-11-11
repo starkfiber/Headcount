@@ -9,3 +9,4 @@ Every enrolled learner must have one row with `studentId` and `status`: Present,
 Run `node --test attendance.test.mjs` with Node 22+. No network, storage or paid inference dependencies.
 
 Status: adapter and unit tests; not yet wired into the live Academy import interface. Next: an authorised preview/confirm import screen, concurrency/version checks, export audit and centre-isolation integration tests with synthetic learners. No live learner data has been copied or changed.
+

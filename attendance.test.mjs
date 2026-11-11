@@ -7,3 +7,4 @@ test('rejects calendar rollover dates',()=>{assert.throws(()=>attendanceAction({
 test('rejects partial, duplicate and unenrolled rows',()=>{for(const rows of [[{studentId:'a',status:'Present'}],[{studentId:'a',status:'Present'},{studentId:'a',status:'Late'}],[{studentId:'a',status:'Present'},{studentId:'x',status:'Late'}]])assert.throws(()=>attendanceAction({...input(),rows}));});
 test('does not invent attendance for unmarked or excused learners',()=>{assert.equal(attendanceSummary({a:'Unmarked',b:'Excused'}).attendanceRate,null);assert.equal(attendanceSummary({a:'Present',b:'Absent',c:'Excused'}).attendanceRate,50);});
 test('summary contains counts, never learner identifiers',()=>{const summary=attendanceSummary({learnerPrivate:'Present'});assert.equal(JSON.stringify(summary).includes('learnerPrivate'),false);});
+
