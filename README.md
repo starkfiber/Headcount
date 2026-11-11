@@ -2,9 +2,13 @@
 
 **Know who is here. Find out what clicked. Plan what comes next.**
 
-Free attendance, live lesson quizzes and private exit tickets by Stark Fiber Enterprise. MIT open source.
+A colourful classroom space for attendance, live lesson quizzes and private exit tickets. Built by Stark Fiber Enterprise. MIT open source.
+
+Rounded Nunito typography, warm paper surfaces and four distinct answer colours give Headcount its own identity. Letter labels, focus rings and reduced-motion support keep playfulness usable.
 
 [Start a classroom](https://starkfiber.my/headcount/classroom) · [Join with a code](https://starkfiber.my/headcount/join) · [Explore Headcount](https://starkfiber.my/headcount)
+
+![Headcount classroom home](headcount-preview.png)
 
 ## One lesson, one clear flow
 
