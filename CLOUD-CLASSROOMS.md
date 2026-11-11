@@ -41,3 +41,7 @@ Start session saves the classroom and opens its QR invite without requiring a ro
 ## Classroom projection and bulk confirmation
 
 The read-only screen token exposes joining nicknames only in the lobby, never teacher attendance records or feedback. The teacher selects a snapshot of participants and submits one authenticated batch; new arrivals remain unselected. Validation completes before one database update; invalid or stale participant IDs reject the whole batch. Existing roster entries should be marked instead of duplicated. Native fullscreen is user-initiated with a full-page fallback; nickname tiles respect reduced motion. Refresh uses the existing three-second polling, not WebSockets. No extra dependency or external skill was needed; reviewed screenfull on GitHub for browser support considerations.
+
+## Teacher phone remote
+
+Open “Control from your phone” in a running classroom and scan its QR. The phone must sign into the owning teacher account. The URL carries only the session ID, never a control token. Login preserves a strictly validated remote destination. The remote submits expected phase, question and leaderboard state; stale commands return409, so retrying an old tap cannot advance another question or toggle the board again. The screen polls without navigation and shows a dedicated leaderboard panel when enabled; hide it to return to the question. Native fullscreen remains user-initiated on the display. No new dependency.
