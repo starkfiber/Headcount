@@ -23,8 +23,8 @@ The teacher decides when to reveal, move on and show scores. No speed bonus, pai
 
 ## One lesson, one clear flow
 
-1. **Prepare:** save a class roster and reuse a lesson quiz.
-2. **Welcome:** take attendance; students join with a code and nickname, without email.
+1. **Prepare:** name your class and start a session. Class lists and quizzes are optional.
+2. **Welcome:** show the QR code; students join with a nickname, without email. Confirm attendance yourself. Add a class list only to track expected absences.
 3. **Teach:** present questions, collect responses, reveal and discuss.
 4. **Listen:** open exit tickets for confidence, one learning point and a request for help.
 5. **Follow up:** review topic results and private learner responses; export before retention expires.

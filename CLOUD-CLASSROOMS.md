@@ -33,3 +33,7 @@ Unit tests cover teacher isolation, stale saves, answer withholding, phase trans
 Countdown0/15/30/60 seconds is selected before a question. The server rejects answers at the deadline. Time expiry never reveals or advances automatically; the teacher can add15 seconds. Refresh/rejoin reads the existing deadline rather than restarting it. Leaderboards are off by default; when enabled, only nicknames and revealed-answer points appear. Correct answers earn100 points, ties share ranks, and no speed bonus applies. Streaks and levels reset with each session. PNG/SVG keepsakes are generated on the student's device.
 
 QR generation uses vendored MIT qrcode-generator2.0.4; codes contain the public joining URL and code, not participant or projector credentials. Scan prefills the code. Classroom feedback and exit-ticket notes remain private even when the scoreboard is enabled. Countdown rendering uses local monotonic elapsed time against a server snapshot; network synchronization still uses polling.
+
+## Scan-first attendance
+
+Start session saves the classroom and opens its QR invite without requiring a roster or quiz. Class lists are optional. Joining never marks attendance. Teachers can add a joined nickname to this session and confirm present, or mark an existing roster entry to avoid duplicates. Repeated confirmation is idempotent. This does not add the nickname to the saved class list. Attendance remains editable and exportable; identifying absences needs an expected class list.
