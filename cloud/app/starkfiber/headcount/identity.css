@@ -1,0 +1,1 @@
+body:has([data-headcount]) [data-sfe-site-navigation]{display:none}body:has([data-headcount]){background:#fff9ef}[data-headcount]{font-family:var(--font-headcount),ui-rounded,system-ui,sans-serif;color:#30234c}[data-headcount] a,[data-headcount] button{-webkit-tap-highlight-color:transparent}
