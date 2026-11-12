@@ -49,3 +49,7 @@
 @media(prefers-reduced-motion:reduce){.countdownStage strong,.waitingMascot,.resultTrack i{animation:none!important}}
 
 .phoneRemote{width:100%;margin:0 auto;padding:0 24px 44px}.phoneRemote .nav{justify-content:flex-start}@media(max-width:650px){.phoneRemote{padding:0 16px 32px}}
+
+.connectionUrl{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:24px;background:#eee6fb;border:1px solid #d4c3ec;border-radius:20px;margin:24px 0}.connectionUrl code{overflow-wrap:anywhere;flex:1;min-width:0;font-size:15px}.codeExample{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.7;padding:20px;background:#f4eefb;border-radius:16px}.lessonShelf label{display:grid;gap:8px;margin:16px 0}.lessonShelf article{min-width:0}.lessonShelf input{min-width:0;width:100%;box-sizing:border-box}
+
+.sessionReport{padding:28px;background:#fffdf7;border:1px solid #d9cce9;border-radius:24px;margin-bottom:32px}.sessionReport .topicGrid article,.sessionReport .feedbackPeople article{padding:20px}.sessionReport .stats{margin:24px 0}@media(max-width:600px){.sessionReport{padding:18px}.sessionReport .sectionHead{align-items:flex-start;gap:16px;flex-wrap:wrap}}
