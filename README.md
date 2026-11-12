@@ -62,3 +62,11 @@ Hosted sessions last six hours. Session records are cleaned after seven days on 
 Read [CONTRIBUTING.md](CONTRIBUTING.md). Useful contributions include accessibility, translations, clearer teacher workflows and tested recovery behaviour. Include a small reproduction and screenshots for visual changes. Please do not put student records or credentials in issues.
 
 **MIT licensed.** See [LICENSE](LICENSE). Original launch illustration generated for SFE with OpenAI image generation; source prompt in [ARTWORK.md](ARTWORK.md). No Kahoot assets or source code are included.
+
+## Prepare → Teach → Understand
+
+Connect your own AI assistant to prepare reusable lesson drafts and review aggregate class results. Search your lessons by subject and level, teach from your phone and download the question report afterwards. You retain all live classroom controls.
+
+[Connect your assistant](https://starkfiber.my/headcount/connect) · [Tools and permissions](TEACHING-ASSISTANT.md)
+
+The connection uses OAuth with separate read and preparation permissions. No tool receives student identities or written exit tickets. AI is optional; no paid model inference runs inside Headcount.

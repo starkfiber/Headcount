@@ -61,3 +61,11 @@ Readable service/API/UI/test files now live under `cloud/` at their original int
 A teacher-triggered five-second lead-in uses a server deadline (`countdownEnds`). During countdown, students and the projector receive no question, and answers are rejected. Subsequent reads resolve the same round after the deadline; refresh does not start another countdown. The question timer starts at that deadline. Correct answers and progression still require teacher actions. Polling means a late-connected device may observe only part of the countdown.
 
 Projector sounds are synthesized locally, muted by default and enabled through a user gesture. Fresh loads do not replay event sounds. They announce countdown/reveal/end, not correctness of an individual student. Reduced-motion CSS suppresses decorative animation. Do not infer physical-device testing from browser viewport checks.
+
+## v0.3.0 — teaching assistant
+
+The source archive includes the lesson metadata migration, aggregate session reports, MCP dispatcher, authenticated HTTP endpoint and connection page. Existing lessons remain readable. Draft writes are idempotent by teacher/request ID; retries cannot silently create duplicate lessons.
+
+Host OAuth requirements: register the exact `/api/sfe/headcount/mcp` resource and `headcount:read` / `headcount:prepare` scopes, expose protected-resource metadata, allow these scopes/resources during dynamic client registration and display the requested permissions on signed consent. Do not extend existing Kit grants automatically. Require verified accounts, ownership checks, audience-bound JWTs, current consent and immediate revocation. `sfe-headcount-agent.ts` illustrates the adapter contract against SFE's host services; private account infrastructure is not included. Supply equivalent host adapters before running this integration.
+
+See TEACHING-ASSISTANT.md for setup, privacy, tools and limits. Tests that import SFE auth adapters run in the host application, not the root standalone tool.
