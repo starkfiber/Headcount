@@ -1,65 +1,64 @@
-# Headcount
+<p align="center"><img src="classroom-club.webp" alt="Headcount: colourful characters building a staircase together" width="820"></p>
 
-**Know who is here. Find out what clicked. Plan what comes next.**
+# Headcount · The Classroom Club
 
-A colourful classroom space for attendance, live lesson quizzes and private exit tickets. Built by Stark Fiber Enterprise. MIT open source.
+**Bring your class together. Make every answer a learning moment.**
 
-Rounded Nunito typography, warm paper surfaces and four distinct answer colours give Headcount its own identity. Letter labels, focus rings and reduced-motion support keep playfulness usable.
+Free attendance, teacher-led quizzes and learning check-ins by **Stark Fiber Enterprise**.
 
-[Start a classroom](https://starkfiber.my/headcount/classroom) · [Join with a code](https://starkfiber.my/headcount/join) · [Explore Headcount](https://starkfiber.my/headcount)
+[**Start a classroom →**](https://starkfiber.my/headcount/classroom) · [Join a session](https://starkfiber.my/headcount/join) · [Explore Headcount](https://starkfiber.my/headcount)
 
-![Headcount classroom home](headcount-preview.png)
+## One lesson. Three good moments.
 
-## Make room for a little fun
+| Bring everyone in | Make thinking visible | Know what comes next |
+| --- | --- | --- |
+| Students scan a QR and choose a nickname. Teachers confirm attendance together. | Lead a quiz from your phone while the classroom screen stays open. | Collect exit tickets and see topics that need another look. |
 
-- Reconnect on wake, online and refresh; retry-safe joining and locally queued answers.
-- Phone remote: scan from your teacher workspace, sign in, then start, reveal, advance and show the leaderboard while the projector stays fullscreen.
-- Teacher-started 15, 30 or 60 second rounds, or no timer. Add time when the class needs it.
-- Full-page classroom lobby with a large QR code and arriving nickname tiles. Native fullscreen where supported.
-- Select waiting students and confirm attendance together; students never mark themselves present.
-- Optional nickname leaderboard, shared ranks and equal points for correct answers.
-- Session streaks, levels and gentle answer celebrations, with reduced-motion support.
-- Three free starter quizzes: numbers, nature and digital safety.
-- A PNG or SVG learning keepsake at the end of the session.
+- **You set the pace.** Start a countdown, reveal the answer, show the leaderboard and move on when ready.
+- **No student accounts.** Nicknames, joining codes and optional class lists.
+- **A little game-day energy.** Answer feedback, streaks, session badges, animated results and optional projector sound.
+- **Reusable lessons.** Save your quizzes or start with a warm-up.
+- **Recovery built in.** Retry-safe joining and first-answer-wins submission. Pending answers retry after reconnect, subject to the question deadline.
+- **Free hosted classrooms.** 10 classes, 100 learners per class and 30 questions per quiz. No subscription.
 
-The teacher decides when to reveal, move on and show scores. No speed bonus, paid inference or public display of private exit tickets. Levels and streaks are session activities, not academic credentials.
+## Use it your way
 
-## One lesson, one clear flow
+### Teach now
 
-1. **Prepare:** name your class and start a session. Class lists and quizzes are optional.
-2. **Welcome:** show the QR code; students join with a nickname, without email. Confirm attendance yourself. Add a class list only to track expected absences.
-3. **Teach:** present questions, collect responses, reveal and discuss.
-4. **Listen:** open exit tickets for confidence, one learning point and a request for help.
-5. **Follow up:** review topic results and private learner responses; export before retention expires.
+Open [Headcount](https://starkfiber.my/headcount), create a teacher account, name a class and start a session. Students need only the joining code or QR. A class list is optional; use one when you need to record absences. Joining alone never confirms attendance.
 
-Teachers see missing answers separately from incorrect answers. Feedback suggests **teach again**, **practise together** or **extend**, based on submitted answers. It is a conversation starter, not a judgement of student ability. Participant nicknames are not verified roster identities.
+### Run the local classroom tool
 
-## Choose your edition
+The repository root is a small browser-only attendance and quiz tool. It stores data on your device; it does not host live rooms.
 
-| | Browser-local | Hosted classrooms |
-|---|---|---|
-| Start | Serve this repository’s index.html | Open the website |
-| Accounts | None | Teacher account; students use a code |
-| Data | This browser; export your backups | Teacher-owned classes and temporary sessions |
-| Activities | Attendance and local quiz practice | Live quiz, exit tickets, topic feedback, lesson library |
-| Source | Root JavaScript files | [MIT cloud module](headcount-cloud-source.zip) |
+```sh
+git clone https://github.com/starkfiber/Headcount.git
+cd Headcount
+python3 -m http.server 8080
+```
 
-The cloud module is integration source, not a turnkey hosting package. [Read setup, limits and architecture](CLOUD-CLASSROOMS.md). The standalone root app does not yet include cross-device sessions or exit tickets.
+Open `http://localhost:8080`. Download a backup before clearing browser data or switching devices.
 
-## Run locally
+For its tests, use Node 22 or later:
 
-Use Node 22+ and run `npm test`. Serve this directory with a static HTTP server and open `index.html`; browser modules cannot run from `file://`. The local edition supports up to 300 learners and portable JSON/CSV records. Browser storage is not encrypted; use initials and keep protected backups.
+```sh
+npm test
+```
 
-## Help build it
+### Build the hosted experience
 
-[Contributor guide](CONTRIBUTING.md) · [Learning roadmap](ROADMAP.md) · [MIT licence](LICENSE)
+The readable [`cloud/`](cloud/) source contains the classroom service, API, React screens and tests. [CLOUD-CLASSROOMS.md](CLOUD-CLASSROOMS.md) explains authentication adapters, storage, routes and deployment boundaries. The [source archive](headcount-cloud-source.zip) also includes route wrappers and vendored QR code dependencies.
 
-Useful contributions: keyboard/mobile accessibility, teacher-tested question templates, translations, connection recovery and portable self-hosting adapters. Use synthetic learners in tests and screenshots. Never submit real classroom records or credentials.
+**The cloud module is integration source, not a one-command standalone server.** It needs the documented host adapters. It does not include SFE account data, secrets or private platform code.
 
-## Origins
+## Built for classrooms, not surveillance
 
-Headcount continues the eHadir initiative. The original licence and Academy attendance adapter remain in this repository with their history and attribution. No original school database or learner records are included. SFE brand artwork is separate from the MIT code; use your own identity for forks.
+Teachers control sessions and attendance. Exit-ticket reflections stay private to the teacher. Public leaderboards are optional and use nicknames. There is no speed bonus. Students are not verified identities; Headcount is not a secure examination system.
 
-## Dedicated quiz play screen
+Hosted sessions last six hours. Session records are cleaned after seven days on service access; export what you need. See [Privacy](https://starkfiber.my/privacy) and [the architecture notes](CLOUD-CLASSROOMS.md).
 
-Live play has a compact player bar, responsive four-answer grid, clear selected/revealed states and short question/result transitions. Reduced-motion preferences are respected. Teacher pacing, attendance confirmation and retry-safe answer recovery remain unchanged. The hosted classroom integration source is included in `headcount-cloud-source.zip`; it requires the documented SFE authentication/runtime integration.
+## Help make learning better
+
+Read [CONTRIBUTING.md](CONTRIBUTING.md). Useful contributions include accessibility, translations, clearer teacher workflows and tested recovery behaviour. Include a small reproduction and screenshots for visual changes. Please do not put student records or credentials in issues.
+
+**MIT licensed.** See [LICENSE](LICENSE). Original launch illustration generated for SFE with OpenAI image generation; source prompt in [ARTWORK.md](ARTWORK.md). No Kahoot assets or source code are included.

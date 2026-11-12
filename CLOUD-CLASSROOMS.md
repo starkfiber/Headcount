@@ -53,3 +53,11 @@ Student joins use a browser-generated256bit recovery token saved before sending;
 ## Dedicated quiz play screen
 
 Live play has a compact player bar, responsive four-answer grid, clear selected/revealed states and short question/result transitions. Reduced-motion preferences are respected. Teacher pacing, attendance confirmation and retry-safe answer recovery remain unchanged. The hosted classroom integration source is included in `headcount-cloud-source.zip`; it requires the documented SFE authentication/runtime integration.
+
+## Classroom Club release
+
+Readable service/API/UI/test files now live under `cloud/` at their original integration paths. The archive includes additional route wrappers, QR vendor code and installation notes. The root local tool remains independent.
+
+A teacher-triggered five-second lead-in uses a server deadline (`countdownEnds`). During countdown, students and the projector receive no question, and answers are rejected. Subsequent reads resolve the same round after the deadline; refresh does not start another countdown. The question timer starts at that deadline. Correct answers and progression still require teacher actions. Polling means a late-connected device may observe only part of the countdown.
+
+Projector sounds are synthesized locally, muted by default and enabled through a user gesture. Fresh loads do not replay event sounds. They announce countdown/reveal/end, not correctness of an individual student. Reduced-motion CSS suppresses decorative animation. Do not infer physical-device testing from browser viewport checks.

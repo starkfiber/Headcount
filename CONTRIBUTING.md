@@ -1,18 +1,20 @@
 # Contributing to Headcount
 
-Start with one classroom problem and an observable outcome. Open an issue describing the teacher/student flow, expected behavior and a small synthetic example.
+Start with a small issue describing the classroom problem, who it affects and the intended result.
 
-## Review checklist
+## Two parts of this repository
 
-- Keep the free core useful. Avoid paid AI calls in normal classroom flows.
-- Preserve MIT notices and third-party attribution. Do not copy proprietary learning content or assets.
-- Use fictional names and no student records, credentials or production databases.
-- Never send correct answers to students before reveal, or private reflections to the public screen.
-- Treat nicknames as unverified; never infer attendance from joining.
-- Test account isolation, retries, refresh/rejoin, expired sessions and validation failures.
-- Check keyboard access, visible focus, reduced motion and 320/390/768/1440px widths.
-- Describe actual measurements; do not claim unlimited scale or zero latency.
+- Root: browser-local classroom tool. Run `npm test` with Node 22+ and serve with a static server.
+- `cloud/`: hosted classroom integration. Requires the authentication, database, validation and rate-limit adapters documented in CLOUD-CLASSROOMS.md. Test in isolated storage, never against a real class.
 
-Run `npm test` for the standalone app. For the cloud module, use the documented Node 24/Vitest host setup and run its service tests. Submit focused pull requests with before/after screenshots and exact test results. Keep speculative features clearly marked as proposals.
+## Before opening a pull request
 
-Report sensitive security issues privately through https://starkfiber.my/enquire rather than posting exploit details or learner data in public issues.
+1. Keep teacher control explicit. Do not reveal answers or advance a question automatically.
+2. Preserve first-answer-wins, retry-safe joins, teacher ownership and private feedback boundaries.
+3. Test keyboard navigation, 320px/390px mobile widths, desktop projection and reduced motion.
+4. Exercise empty, loading, error, reconnect and completed states—not only a populated screenshot.
+5. Explain the change, relevant checks and any limitations. Add before/after screenshots for visible changes.
+
+No student records, credentials or production databases in commits or issues. For a security concern, use the private contact route at https://starkfiber.my/enquire rather than publishing an exploitable report.
+
+All contributions must be compatible with the MIT licence. Keep third-party notices intact. Do not copy another product’s branding or proprietary assets.
