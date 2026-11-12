@@ -49,3 +49,7 @@ Open “Control from your phone” in a running classroom and scan its QR. The p
 ## Interrupted connections
 
 Student joins use a browser-generated256bit recovery token saved before sending; repeat requests recover the same participant even if joining was locked after the original response was lost. Token is scoped to the session. Existing sessionStorage identities remain valid. Pending answers are stored before sending and retried on reconnect/refresh. The server acknowledges already-recorded answers after reveal without overwriting them; genuinely unsent late answers are rejected with a visible notice. Server-confirmed answers remain authoritative. Wake, pageshow and online events trigger refresh; fetches time out after10seconds. Teacher commands are not replayed automatically. Storage clearing, a new browser/device or a closed private session cannot recover a browser-only identity. No guarantee of delivery after a teacher deadline; no physical device-lock automation claimed.
+
+## Dedicated quiz play screen
+
+Live play has a compact player bar, responsive four-answer grid, clear selected/revealed states and short question/result transitions. Reduced-motion preferences are respected. Teacher pacing, attendance confirmation and retry-safe answer recovery remain unchanged. The hosted classroom integration source is included in `headcount-cloud-source.zip`; it requires the documented SFE authentication/runtime integration.

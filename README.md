@@ -59,3 +59,7 @@ Useful contributions: keyboard/mobile accessibility, teacher-tested question tem
 ## Origins
 
 Headcount continues the eHadir initiative. The original licence and Academy attendance adapter remain in this repository with their history and attribution. No original school database or learner records are included. SFE brand artwork is separate from the MIT code; use your own identity for forks.
+
+## Dedicated quiz play screen
+
+Live play has a compact player bar, responsive four-answer grid, clear selected/revealed states and short question/result transitions. Reduced-motion preferences are respected. Teacher pacing, attendance confirmation and retry-safe answer recovery remain unchanged. The hosted classroom integration source is included in `headcount-cloud-source.zip`; it requires the documented SFE authentication/runtime integration.
