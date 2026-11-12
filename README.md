@@ -70,3 +70,9 @@ Connect your own AI assistant to prepare reusable lesson drafts and review aggre
 [Connect your assistant](https://starkfiber.my/headcount/connect) · [Tools and permissions](TEACHING-ASSISTANT.md)
 
 The connection uses OAuth with separate read and preparation permissions. No tool receives student identities or written exit tickets. AI is optional; no paid model inference runs inside Headcount.
+
+## Classroom pilot · v0.3.1
+
+An illustrated assistant connection page, clearer lesson reports and refresh-safe exit-ticket drafts. We ran the complete lesson → classroom → aggregate report → follow-up loop with six synthetic learners.
+
+[What we tested, fixed and did not claim](CLASSROOM-PILOT.md) · [Connect your assistant](https://starkfiber.my/headcount/connect)
