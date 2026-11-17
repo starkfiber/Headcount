@@ -12,4 +12,13 @@ export function validate(data){
 export function summary(roster){const counts=Object.fromEntries(statuses.map(s=>[s,0]));for(const value of Object.values(roster)){if(!statuses.includes(value))throw Error('Invalid status');counts[value]++;}return counts;}
 export function grade(questions,answers){if(!questions.length)throw Error('Add a question first.');if(questions.some(q=>!Number.isInteger(answers[q.id])||answers[q.id]<0||answers[q.id]>3))throw Error('Answer every question.');return {correct:questions.filter(q=>q.answer===answers[q.id]).length,total:questions.length};}
 export function csvCell(value){let v=String(value);if(/^[\s]*[=+@-]/.test(v))v="'"+v;return '"'+v.replaceAll('"','""')+'"';}
-export function attendanceCsv(state,date){if(!validDate(date))throw Error('Choose a valid date');return [['Class','Date','Learner','Status'],...state.learners.map(l=>[state.className,date,l.name,state.attendance[date]?.[l.id]||'Unmarked'])].map(row=>row.map(csvCell).join(',')).join('\r\n');}
+export function attendanceStatus(roster, learnerId) {
+ return roster && Object.hasOwn(roster, learnerId) ? roster[learnerId] : 'Unmarked';
+}
+
+export function attendanceCsv(state, date) {
+ if (!validDate(date)) throw Error('Choose a valid date');
+ const roster = state.attendance[date];
+ const rows = state.learners.map(({id, name}) => [state.className, date, name, attendanceStatus(roster, id)]);
+ return [['Class', 'Date', 'Learner', 'Status'], ...rows].map(row => row.map(csvCell).join(',')).join('\r\n');
+}

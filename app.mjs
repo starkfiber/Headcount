@@ -1,17 +1,48 @@
-import {blank,validate,validDate,statuses,summary,grade,attendanceCsv} from './model.mjs';
+import {blank,validate,validDate,statuses,summary,grade,attendanceCsv,attendanceStatus} from './model.mjs';
 const $=s=>document.querySelector('.hc-app').querySelector(s),key='sfe-headcount-v1';let state=blank(),quizQuestions=[];
 function message(text){$('#status').textContent=text;}
 try{const saved=localStorage.getItem(key);if(saved)state=validate(JSON.parse(saved));}catch{message('Your saved classroom could not be opened. Restore a backup, or start a new classroom.');}
 const now=new Date();$('#date').value=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
-function save(next){try{next=validate(next);localStorage.setItem(key,JSON.stringify(next));state=next;message('Saved on this device.');render();return true;}catch(e){message(e.message==='Use a valid Headcount classroom backup.'?e.message:'Could not save. '+e.message);return false;}}
+function save(next, update = render) {
+ try {
+  next = validate(next);
+  localStorage.setItem(key, JSON.stringify(next));
+ } catch (error) {
+  message('Could not save. ' + error.message);
+  return false;
+ }
+ state = next;
+ message('Saved on this device.');
+ update();
+ return true;
+}
+function renderAttendanceSummary(date) {
+ const roster = state.attendance[date] || {};
+ const counts = summary(Object.fromEntries(state.learners.map(learner =>
+  [learner.id, attendanceStatus(roster, learner.id)])));
+ $('#attendance-summary').replaceChildren(...statuses.map(status =>
+  el('span', `${counts[status]} ${status.toLowerCase()}`)));
+}
 function el(tag,text,cls){const e=document.createElement(tag);if(text!==undefined)e.textContent=text;if(cls)e.className=cls;return e;}
 function button(text,action){const b=el('button',text);b.type='button';b.addEventListener('click',action);return b;}
 function download(content,name,type){const url=URL.createObjectURL(new Blob([content],{type})),a=el('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function render(){
- $('#class-name').value=state.className;const date=$('#date').value,roster=state.attendance[date]||{},container=$('#roster');container.replaceChildren();
+ $('#class-name').value=state.className;const date=$('#date').value,container=$('#roster');container.replaceChildren();
  if(!state.learners.length)container.append(el('p','Your classroom starts with one learner. Add a name or initials above.','empty'));
- for(const learner of state.learners){const row=el('div',undefined,'roster-row'),select=el('select');select.setAttribute('aria-label',`Attendance for ${learner.name}`);for(const status of statuses)select.add(new Option(status,status));select.value=roster[learner.id]||'Unmarked';select.onchange=()=>{if(!validDate(date)){message('Choose a valid class date.');render();return;}const next=structuredClone(state);next.attendance[date]??={};next.attendance[date][learner.id]=select.value;save(next);};row.append(el('strong',learner.name),select,button('Remove',()=>{if(!confirm(`Remove ${learner.name} and their attendance from this classroom? Download a backup first.`))return;const next=structuredClone(state);next.learners=next.learners.filter(l=>l.id!==learner.id);for(const record of Object.values(next.attendance))delete record[learner.id];save(next);}));container.append(row);}
- const counts=summary(Object.fromEntries(state.learners.map(l=>[l.id,roster[l.id]||'Unmarked'])));$('#attendance-summary').replaceChildren(...['Present','Absent','Late','Unmarked'].map(s=>el('span',`${counts[s]} ${s.toLowerCase()}`)));$('#export').disabled=!state.learners.length;
+ for(const learner of state.learners){const row=el('div',undefined,'roster-row'),select=el('select');select.setAttribute('aria-label',`Attendance for ${learner.name}`);for(const status of statuses)select.add(new Option(status,status));const committedStatus = () => attendanceStatus(state.attendance[date], learner.id);
+ select.value = committedStatus();
+ select.onchange = () => {
+  if (!validDate(date)) {
+   select.value = committedStatus();
+   message('Choose a valid class date.');
+   return;
+  }
+  const next = structuredClone(state);
+  next.attendance[date] ??= {};
+  next.attendance[date][learner.id] = select.value;
+  if (!save(next, () => renderAttendanceSummary(date))) select.value = committedStatus();
+ };row.append(el('strong',learner.name),select,button('Remove',()=>{if(!confirm(`Remove ${learner.name} and their attendance from this classroom? Download a backup first.`))return;const next=structuredClone(state);next.learners=next.learners.filter(l=>l.id!==learner.id);for(const record of Object.values(next.attendance))delete record[learner.id];save(next);}));container.append(row);}
+ renderAttendanceSummary(date);$('#export').disabled=!state.learners.length;
  const list=$('#question-list');list.replaceChildren();if(!state.questions.length)list.append(el('p','Add a question, four options and the correct answer.','empty'));
  for(const q of state.questions){const card=el('article',undefined,'question-card');card.append(el('p',q.text),el('p',`Answer: ${q.options[q.answer]}`),button('Remove question',()=>{const next=structuredClone(state);next.questions=next.questions.filter(x=>x.id!==q.id);save(next);}));list.append(card);}$('#start-quiz').disabled=!state.questions.length;
 }
