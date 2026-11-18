@@ -5,3 +5,10 @@ test('rejects unknown schema and excessive data',()=>{assert.throws(()=>validate
 test('quiz requires complete choices and grades exactly',()=>{const questions=[{id:'q',answer:1}];assert.throws(()=>grade(questions,{}));assert.deepEqual(grade(questions,{q:1}),{correct:1,total:1});assert.equal(grade(questions,{q:0}).correct,0);});
 test('CSV quotes text and neutralises formulas',()=>{const s=blank();s.learners.push({id:'a',name:'=HYPERLINK("x")'});const csv=attendanceCsv(s,'2026-11-11');assert.ok(csv.includes("'=HYPERLINK"));assert.ok(csv.includes('Unmarked'));});
 test('learner text stays data and malformed questions fail import',()=>{const s=blank();s.learners.push({id:'a',name:'<script>alert(1)</script>'});assert.equal(validate(s).learners[0].name,s.learners[0].name);s.questions=[{id:'q',text:'?',options:['a','b'],answer:0}];assert.throws(()=>validate(s));});
+
+test('imports old learner IDs without treating inherited properties as attendance', () => {
+ const state = blank();
+ state.learners.push({id: 'constructor', name: 'Learner'});
+ state.attendance['2026-11-11'] = {};
+ assert.match(attendanceCsv(validate(state), '2026-11-11'), /"Learner","Unmarked"/);
+});
